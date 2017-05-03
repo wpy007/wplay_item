@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vueDemo1</title>
+	<link rel="stylesheet" href="./css/vuedemo1.css">
+</head>
+<body>
+	<div id="example1"></div>
+
+	<span>Message: {{msg}}</span>
+	<span v-once>this will never change: {{msg}}</span>
+
+	<div v-html="rawHtml"></div>
+
+	<div v-bind:id="dynamicId"></div>
+	<div v-bind:disabled="someDynamicCondition">Button</div>
+
+	{{number + 1}}
+	{{ok? 'yes': 'no'}}
+	{{message.split('').reverse.join('')}}
+	<div v-bind:id="'list-' + id"></div>
+
+
+	<!-- 重新输入一遍 -->
+	<span>Message: {{ msg }}</span>
+	<span v-once>this will never change: {{ msg }}</span>
+	<div v-html="rawHtml"></div>
+	<div v-bind:id="dynamicID"></div>
+	<div v-bind:disabled="someDynamicCondition">button2</div>
+	
+	{{ number + 1 }}
+	{{ ok ? 'yes' : 'no' }}
+	{{ message.split('').reverse().join('') }}
+	<div v-bind:id="'list' + id"></div>
+	<a v-bind:href="www.baidu.com">点击跳转到百度</a>
+	<a v-on:click="doSomething"></a>
+	<form v-on:submit.prevent="onSubmit"></form>
+	
+	{{ message | capitalize }}
+	<div v-bind:id="rawId | formatId"></div>
+
+	<!-- class与style绑定 -->
+	<div v-bind:class="{ active: isActive }"></div>
+	<div id="static" class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">static</div>
+	<div id="example"></div>
+	
+	<div id="classObject" v-bind:class="classObject">这是一个class中绑定了对象的div</div>
+
+	<div id="arrayDiv" v-bind:class="[activeClass, errorClass]">数组语法</div>
+	<div v-bind:class="[isActive ? activeClass: '', errorClass]"></div>
+
+	<!-- 绑定内联样式 -->
+	<div id="innerStyle" v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">这些都是内联样式造成的结果</div>
+
+	<div id="innerStyle2" v-bind:style=" [styleObject, styleObj]">这些依旧是内联样式，瞅瞅呗</div>
+
+
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="./js/vuedemo1.js"></script>
+</body>
+</html>

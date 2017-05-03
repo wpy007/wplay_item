@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>基础篇-组件</title>
+</head>
+<body>
+	<div id="example">
+		<my-component></my-component>
+
+	</div>
+	<div id="example2">
+		<my-component></my-component>
+	</div>
+
+	<select name="" id="example3">
+		<option is="my-row"></option>
+	</select>
+
+	<div id="example4">
+		<simple-counter></simple-counter>
+		<simple-counter></simple-counter>
+		<simple-counter></simple-counter>
+	</div>
+	
+	<div id="children">
+		<child my-message="hello!"></child>
+	</div>
+	
+
+
+	<div>
+		<input type="text" v-model="parentMsg">
+		<br>
+		<child v-bind:my-message="parentMsg"></child>
+	</div>
+	
+	<div id="counter-event-example">
+		<p>{{ total }}</p>
+		<button-counter v-on:increment="incrementTotal"></button-counter>
+		<button-counter v-on:increment="incrementTotal"></button-counter>
+	</div>
+
+	<!-- <my-component v-on:click.native="doTheThing"></my-component>
+	<input v-model="something">
+	<input type="text" v-bind:value="something" v-on:input="something = $event.target.value">
+	<custom-input v-bind:value="something" v-on:input="something = arguments[0]"></custom-input> -->
+
+	<!--  货币输入 -->
+	<currency-input v-model="price"></currency-input>
+	
+	
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script>
+		//  
+		Vue.component('my-component', {
+			template: '<div>无所事事的wplay</div>'
+		})
+
+		Vue.component('my-component', {
+			template: '<span>{{ message }}</span>',
+			//  data必须是个function
+			data: function () {
+				return {message: 'hello'}
+			}
+		})
+
+		new Vue({
+			el: '#example'
+		})
+
+		var child = {
+			template: '<div>一往无前的pwt和wpy</div>'
+		}
+		new Vue({
+			el: '#example2',
+			components: {
+				'my-component': child
+			}
+		})
+
+		var selectChild = {
+			template: '<option>wplay</option>'
+		}
+		new Vue({
+			el: '#example3',
+			components: {
+				'my-row': selectChild
+			}
+		})
+
+		// example4
+		var data = { counter: 0 };
+		Vue.component('simple-counter', {
+			template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+			data: function () {
+				//return data // 这样子三个共享一个data
+				return {
+					counter: 0 // 这样子没有共享
+				}
+			}
+		})
+		new Vue({
+			el: '#example4'
+		})
+
+		// props
+		/*Vue.component('child', {
+			props: ['myMessage'],
+			template: '<span>{{ message }}</span>'
+		})   // 啊！为什么失败！？不懂
+		new Vue({
+			el: '#children'
+		})*/
+
+		// $on(eventName) 监听事件
+		// $emit(eventName)  触发事件
+
+
+
+		Vue.component('button-counter', {
+			template: '<button v-on:click="increment">{{ counter }}</button>',
+			data: function () {
+				return {
+					counter: 0
+				}
+			},
+			methods: {
+				increment: function () {
+					this.counter += 1;
+					this.$emit('increment')
+				}
+			}
+		})
+
+		new Vue({
+			el: '#counter-event-example',
+			data: {
+				total: 0
+			},
+			methods: {
+				incrementTotal: function () {
+					this.total ++;
+				}
+			}
+		})
+
+
+		// 货币输入
+		Vue.component('currency-input', {
+			template: '<span>$\
+			<input ref="input" v-bind:value="value" \
+			v-on:input="updateValue($event.target.value)">\
+			</span>',
+			props: ['value'],
+			methods: {
+				updateValue: function (value) {
+					var formattedValue = value.trim().slice(0, value.indexOf('.') + 3);
+					if(formattedValue !== value) {
+						this.$refs.input.value = formattedValue;
+					}
+					this.$emit('input', Number(formattedValue));
+				}
+			}
+		})
+
+
+	</script>
+</body>
+</html>

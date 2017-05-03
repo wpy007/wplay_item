@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>具有伸缩性的header</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		h1 {
+			font-weight: 300;
+			font-size: 1.8rem;
+			margin-top: 0;
+		}
+		a {
+			color: #fff;
+		}
+		.draggable-header-view {
+			background-color: #fff;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, .15);
+			width: 320px;
+			height: 560px;
+			overflow: hidden;
+			margin: 30px auto;
+			position: relative;
+			font-family: 'Roboto', Helvetica, Arial, sans-serif;
+			color: #fff;
+			font-size: 14px;
+			font-weight: 300;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.draggable-header-view .bg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 0;
+		}
+		.draggable-header-view .header, .draggable-header-view .content {
+			position: relative;
+			z-index: 1;
+			padding: 30px;
+			box-sizing: border-box;
+		}
+		.draggable-header-view .header {
+			height: 160px;
+		}
+		.draggable-header-view .content {
+			color: #333;
+			line-height: 1.5rem;
+		}
+	</style>
+</head>
+<body>
+	
+	<script type="text/x-template" id="header-view-template">
+		<div class="draggable-header-view"
+		  @mousedown="startDrag" @touchstart="startDrag"
+		  @mousemove="onDrag" @touchmove="onDrag"
+		  @mouseup="stopDrag" @touchend="stopDrag" @mouseleave="stopDrag">
+			<svg class="bg" width="320" height="560">
+				<path :d="headerPath" fill="#01cdb2"></path>
+			</svg>
+			<div class="header">
+				<slot name="header"></slot>
+			</div>
+			<div class="content" :stype="contentPosition">
+				<slot name="content"></slot>
+			</div>
+		</div>
+	</script>
+
+	<div id="app" @touochmove.prevent>
+		<draggable-header-view>
+			<template slot="header">
+				<h1>just a header</h1>
+				<p>Vue.js + dynamic.js </p>
+			</template>
+
+			<template slot="content">
+				note this is just an effect demo
+			</template>
+		</draggable-header-view>
+	</div>
+
+<!-- 引入vue和dynamic -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<script>
+		
+	// 首先写rem
+	(function (doc, win) {
+		var docEl = doc.documentElement,
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+			recalc = function () {
+				var clientWidth = docEl.clientWidth;
+				if (!clientWdith) return;
+				docEl.style.fontSize = (clientWidth / 7.5) + 'px';
+			}
+
+		if (!doc.addEventListener) return;
+		win.addEventListener(resizeEvt, recalc, false);
+		doc.addEventListener('DOMContentLoaded', recalc, false);
+	})(document, window);
+
+	// 然后写vue部分
+	
+
+</script>
+</body>
+</html>

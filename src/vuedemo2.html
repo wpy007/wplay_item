@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vueDemo1</title>
+	<link rel="stylesheet" href="./css/vuedemo2.css">
+</head>
+<body>
+	{{#if ok}}
+		<h1>Yes</h1>
+	{{/if}}
+	
+	<h1 v-if="ok">Yes</h1>
+	<h1 v-else>No</h1>
+
+	<template v-if="ok">
+		<h1>Title</h1>
+		<p>Paragraph 1</p>
+		<p>Paragraph 2</p>
+	</template>
+
+	<div v-if="Math.random() > .5">
+		Now you see me
+	</div>
+	<div v-else>Now you can't see me</div>
+
+	<div v-if="type === 'A'">A</div>
+	<div v-else-if="type === 'B'">B</div>
+	<div v-else-if="type === 'C'">C</div>
+	<div v-else>not A/B/C</div>
+
+	<template v-if="loginType === 'username'">
+		<label for="">Username</label>
+		<input type="text" placeholder="Enter your username" key="username-input">
+	</template>
+	<template v-else>
+		<label for="">Email</label>
+		<input type="text" placeholder="Enter your email address" key="email-input">
+	</template>
+
+	<h1 v-show="ok">Hello!</h1>
+
+	<!-- 列表渲染 -->
+	<ul id="example-1">
+		<li v-for="item in items">
+			{{ item.message }}
+		</li>
+	</ul>
+
+	<ul id="example-2">
+		<li v-for="(item, index) of items"> <!-- 是小括号啊 -->
+			{{ parentMessage }} - {{ index }} - {{ item.message }}
+		</li>
+
+	</ul>
+
+	<ul>
+		<template v-for="item in items">
+			<li>{{ item.msg }}</li>
+			<li class="divider"></li>
+		</template>
+	</ul>
+
+	<ul id="repeat-object" class="demo">
+		<li v-for="(value, key, index) of object"> 
+			{{index}} . {{ key }} : {{ value }}
+		</li>
+	</ul>
+
+	<div>
+		<span v-for="n in 10">{{ n }}</span>
+	</div>
+
+
+	<my-component 
+	v-for="item in items"
+	v-bind:item="item"
+	v-bind:index>
+	</my-component>
+
+	<!-- 一个相对比较完整的模块 -->
+	<div id="todo-list-example">
+		<input type="text"
+		v-model="newTodoText"
+		v-on:keyup.enter="addNewTodo"
+		placeholder="Add a todo">
+		<ul>
+			<li
+			is="todo-item"
+			v-for="(todo, index) in todos"
+			v-bind:title="todo"
+			v-on:remove="todos.splice(index, 1)">	
+			</li>
+		</ul>
+	</div>
+
+
+	
+	<li v-for="n in even(numbers)">{{ n }}</li>
+
+
+	
+
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="./js/vuedemo2.js"></script>
+</body>
+</html>

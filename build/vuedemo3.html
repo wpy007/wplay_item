@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件处理器学习</title>
+</head>
+<body>
+	
+	<div id="example-1">
+		<button v-on:click="counter += 1">增加1</button>
+		<p>这个按钮被点击了 {{ counter }} 次。</p>
+	</div>
+
+	<div id="example-2">
+		<button v-on:click="greet">Greet</button>
+	</div>
+
+	<div id="example-3">
+		<button v-on:click="say('hi')">Say hi</button>
+		<button v-on:click="say('what')">Say what</button>
+		<button v-on:click="warn('Form can not be submitted yet', $event)">Submit</button>
+	</div>
+
+	<!-- 表单控件绑定 -->
+	<input type="text" v-model="message" placeholder="edit me">
+	<p>Message is : {{ message }}</p>
+	
+	<span>Multiline message is:</span>
+	<p style="white-space: pre;">{{message}}</p>
+	<br>
+	<textarea v-model="message" placeholder="add multiple lines"></textarea>
+
+
+	<div id="morecheckbox">
+		<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+		<label for="jack">Jack</label>
+		<input type="checkbox" id="john" value="John" v-model="checkedNames">
+		<label for="john">John</label>
+		<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+		<label for="mike">Mike</label>
+		<br>
+		<span>Checked names: {{ checkedNames }}</span>
+	</div>
+
+	<div id="example-5" class="demo">
+		<select v-model="selected">
+			<option>A</option>
+			<option>B</option>
+			<option>C</option>
+		</select>
+		<span>Selected: {{ selected }}</span>
+	</div>
+
+	<div id="example-6" class="demo" style="margin-top:60px;">
+		<select name="" id="" v-model="selected" multiple style="width: 50px;">
+			<option>A1</option>
+			<option>B2</option>
+			<option>C3</option>
+		</select>
+		<span>Selected: {{ selected }}</span>
+	</div>
+
+	
+
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script>
+		window.onload = function () {
+			var example1 = new Vue({
+				el: '#example-1',
+				data: {
+					counter: 3
+				}
+			})
+
+			var example2 = new Vue({
+				el: '#example-2',
+				data: {
+					name: 'Vue.js'
+				},
+				methods: {
+					greet: function (e) {
+						alert('hello' + this.name + '!');
+						// alert(e.target.tagName); // button
+					}
+				}
+			})
+
+			// example2.greet();
+
+			var example3 = new Vue({
+				el: '#example-3',
+				methods: {
+					say: function (message) {
+						alert(message);
+					},
+					warn: function (message, event) {
+						if (event) event.preventDefault();
+						alert(message);
+					}
+				}
+			})
+
+			var example4 = new Vue({
+				el: '#morecheckbox',
+				data: {
+					checkedNames: [] 
+				}
+			})
+
+			var example5 = new Vue({
+				el: '#example-5',
+				data: {
+					selected: null
+				}
+			})
+
+			var example6 = new Vue({
+				el: '#example-6',
+				data: {
+					selected: []
+				}
+			})
+		}
+	</script>
+</body>
+</html>
