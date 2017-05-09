@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>localStorage学习</title>
+	<style>
+		button {
+			width: 150px;
+			height: 30px;
+			background: #01cdb2;
+			font-size: 20px;
+			line-height: 30px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<button id="ls1">ls1点击次数</button>
+	<button id="ls2">ls2点击次数</button>
+	<button id="getAll">获取所有</button>
+	<button id="getls1">获取ls1</button>
+	<button id="getls2">获取ls2</button>
+	<button id="clearls1">清除ls1</button>
+	<button id="clearls2">清除ls2</button>
+	<button id="clearAll">清除所有</button>
+	<script>
+		// 增改
+		document.getElementById('ls1').onclick = function () {
+
+			if(!localStorage.getItem('a')) {
+				localStorage.setItem('a', '1');
+			} else {
+				var num1 = localStorage.a;
+				// Number()++是不成立的谢谢
+				// num1 = String(Number(num1)++);
+				num1 = Number(num1);
+				num1++;
+				localStorage.setItem('a', String(num1));
+			}
+			
+		}
+
+		document.getElementById('ls2').onclick = function () {
+			localStorage.setItem('b', '2');
+		}
+		// 获取（查）
+		document.getElementById('getAll').onclick = function () {
+			// localStorage.getItem(); // 这是错误的
+			console.log(localStorage);
+			for (var i in localStorage) {
+				console.log(i + '----------------' + localStorage[i]);
+			}
+		}
+		document.getElementById('getls1').onclick = function () {
+			localStorage.getItem('a');
+		}
+		document.getElementById('getls2').onclick = function () {
+			localStorage.getItem('b');
+		}
+
+		//  清除（删）
+		document.getElementById('clearls1').onclick = function () {
+			localStorage.removeItem('a');
+		}
+		document.getElementById('clearls2').onclick = function () {
+			localStorage.removeItem('b');
+		}
+		document.getElementById('clearAll').onclick = function () {
+			localStorage.clear();
+		}
+
+	</script>
+</body>
+</html>

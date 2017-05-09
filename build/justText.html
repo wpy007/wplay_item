@@ -81,6 +81,7 @@
 	transform-origin: 0 0;
 	transform: scale(.5);
 	z-index: -1; /* 这里必须要写z-index了啊，毕竟这里的before是一块，不是一条线，它把.half_bottom整个盖住了 */
+	/*overflow: hidden;*/
 }
 
 .text {
@@ -88,6 +89,9 @@
 	height: 300px;
 	border: 1px solid cyan;
 	text-align: justify;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 </style>
@@ -97,7 +101,7 @@
 		<div id="scrollContent">...</div>
 	</div>
 
-	<div style="height:2000px">
+	<div style="height:2000px;">
 		<p class="half_bottom">
 			<span></span>
 			<input type="text">
