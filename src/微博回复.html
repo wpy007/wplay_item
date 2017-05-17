@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>微博回复</title>
+</head>
+<body>
+	<div id="box">
+		<input type="text" v-model="msg | filterHtml">
+		<br>
+		<div v-html="msg"></div>
+	</div>
+	
+
+	<script src="../libs/js/vue.js"></script>
+	<script>
+		Vue.filter('filterHtml', {
+			read: function (input) {
+				return input.replace(/<[^<+]>/g, '');
+			},
+			write: function () {
+
+			}
+		});
+		var vm = new Vue({
+			data: {
+				msg: '<strong>welcome</strong>'
+			},
+			methods: {
+
+			}
+		}).$mount('#box');
+	</script>
+</body>
+</html>

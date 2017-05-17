@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue瞎写测试系列</title>
+</head>
+<body>
+	<div id="mount-point"></div>	
+
+
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script>
+		window.onload = function () {
+			// Vue.config.silent = true;
+			Vue.config.devtools = true;
+
+			var Profile = Vue.extend({
+				template: '<p>{{firstName}} {{lastName}} is {{alias}}</p>',
+				data: function () {
+					return {
+						firstName: 'wplay',
+						lastName: 'pwt',
+						alias: 'lover'
+					}
+				}
+			})
+
+			new Profile().$mount('#mount-point');
+		}
+	</script>
+</body>
+</html>

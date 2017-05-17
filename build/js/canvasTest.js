@@ -1,7 +1,7 @@
+'use strict';
+
 window.onload = function () {
 	var c = document.getElementById('myCanvas');
-
-
 
 	// 画一条线
 	var ctx = c.getContext('2d');
@@ -17,11 +17,10 @@ window.onload = function () {
 	ctx.fillStyle = grd;
 	ctx.fillRect(0, 0, 200, 200);
 
-
 	// 圆
 	var ctx1 = c.getContext('2d');
 	ctx1.beginPath();
-	ctx1.arc(95, 50, 40, 0, 2*Math.PI);
+	ctx1.arc(95, 50, 40, 0, 2 * Math.PI);
 	ctx1.stroke();
 
 	//  实心字
@@ -33,7 +32,4 @@ window.onload = function () {
 	var ctx3 = c.getContext('2d');
 	ctx3.font = '30px 微软雅黑';
 	ctx3.strokeText('hey PWT', 30, 150);
-
-
-	
-}
+};

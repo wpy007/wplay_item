@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>杂七杂八</title>
+</head>
+<body>
+	<button id="btn">点击</button>
+
+	<script>
+		/*var handler = {
+			msg: 'hi wplay',
+			cb: function (e) {
+				console.log(this.msg);
+			}
+		}
+
+		var btn = document.getElementById('btn');
+		window.addHandler(btn, 'click', handler.cb);*/
+
+
+		// h5定位api
+		navigator.geolocation.getCurrentPosition (geo_success, geo_error);
+		function geo_success (position) {
+			console.log(position);
+		}
+		function geo_error (msg) {
+			console.log(msg.message);
+		}
+
+	</script>
+</body>
+</html>

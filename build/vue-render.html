@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue-render</title>
+</head>
+<body>
+	<div id="box">
+		<anchored-heading :level="1">hello wplay</anchored-heading>
+	</div>
+
+	<div id="hook-arguments-example" v-demo:hello.a.b="message"></div>
+
+<script src="../libs/js/vue.js"></script>
+<!-- <script>
+	var getChildTextContent = function (children) {
+		return children.map(function (node) {
+			return node.children ? getChildrenTextContent(node.children) : node.text
+		}).join('')
+	} 
+
+	Vue.component('anchored-heading', {
+		render: function (createElement) {
+			// create kebabCase id
+			var headingId = getChildrenTextContent(this.$slots.default)
+				.toLowerCase()
+				.replace(/\W+/g, '-')
+				.replace(/(^\-|\-$)/g, '')
+
+			return createElement(
+				'h' + this.level,
+				[
+					createElement('a', {
+						attrs: {
+							name: headingId,
+							href: '#' + headingId
+						}
+					}, this.$slots.default)
+				]
+			)
+		},
+		props: {
+			level: {
+				type: Number,
+				required: true
+			}
+		}
+	})
+	new Vue({
+		//  vue warning: 不建议绑定vue到html或者body标签
+		el: '#box'
+	})
+
+	// 瞎j8写的，反正不能实现
+	render: function (createElement) {
+		return createElement('div',
+			Array.apply(null, {length: 20}).map(function () {
+				return createElement('p', 'hi')
+			})
+		)
+	}
+
+	render: function (createElement) {
+		var self = this;
+		return createElement('input', {
+			domProps: {
+				value: self.value
+			},
+			on: {
+				input: function (event) {
+					self.value = event.target.value
+				}
+			}
+		})
+	}
+
+	//  .capture  .once
+	@click.capture == !click
+	@click.once == ~click
+	@click.capture.once == ~!click
+
+	.stop, .prevent, .self, .enter, .13, .ctrl
+
+	// 阻止事件冒泡
+	e.stopPropagation()
+	// 阻止默认事件
+	e.preventDefault()   
+
+
+	render: function (createElement) {
+		return createElement('div', this.$slots.default)
+	}
+
+	render: function (createElement) {
+		return createElement('div', [
+			this.$scopedSlots.default({
+				text: this.msg
+			})
+		])
+	}
+
+	render (createElement) {
+		return createElement('div', [
+			createElement('child', {
+				scopedSlots: {
+					default: function (props) {
+						return createElement('span', props.text)
+					}
+				}
+			})
+		])
+	}
+
+	createElement(
+		'anchored-heading', {
+			props: {
+				level: 1
+			}
+		}, [
+			createElement('span', 'hello'),
+			'wplay!'
+		]
+	)
+
+	Vue.component('my-component', {
+		functional: true,
+		render: function (createElement, context) {
+
+		},
+		props: {
+
+		}
+	})
+</script>
+<script>
+	import AnchoredHeading from './Anchoredheading.vue'
+
+	new Vue({
+		el: '#demo',
+		render (h) {
+			return (
+				// ...
+			)
+		}
+	})
+</script> -->
+	
+<script>
+	Vue.directive('demo', {
+		bind: function (el, binding, vnode) {
+			var s = JSON.stringify;
+			el.innerHTML = 
+			  'name: '       + s(binding.name) + '<br>' +
+		      'value: '      + s(binding.value) + '<br>' +
+		      'expression: ' + s(binding.expression) + '<br>' +
+		      'argument: '   + s(binding.arg) + '<br>' +
+		      'modifiers: '  + s(binding.modifiers) + '<br>' +
+		      'vnode keys: ' + Object.keys(vnode).join(', ')
+		}
+	})
+
+	new Vue({
+		el:'#hook-arguments-example',
+		data: {
+			message: 'hello wplay'
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue</title>
+</head>
+<body>
+	
+	<script src="../libs/js/vue.js"></script>
+	<script>
+		var data = {a: 1};
+		var vm = new Vue({
+			data: data,
+			computed: {
+				a: function () {
+
+				},
+				b: {
+					get: function () {
+
+					},
+					set: function () {
+
+					}
+				}
+			},
+			methods: {
+				add: function () {
+
+				}
+			},
+			watch: {
+				a: function () {
+
+				}
+			},
+			render () {
+
+			},
+			renderError () {
+
+			},
+			mixins: [mixin]
+		})
+		var Component = Vue.extend({
+			data: function () {
+				return {a: 2}
+			}
+		})
+		var mixin = {
+			//...
+		}
+	</script>
+</body>
+</html>
